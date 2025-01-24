@@ -141,11 +141,11 @@ class Board:
             for pocket in range(0, 6):
                 count += self.pockets[pocket].get_count()
                 self.pockets[pocket].set_count(0)
-            self.pockets[6] += count
+            self.pockets[6].set_count(self.pockets[6] + count)
         elif owner == "B":
             for pocket in range(7, 13):
                 count += self.pockets[pocket].get_count()
                 self.pockets[pocket].set_count(0)
-            self.pockets[13] += count
+            self.pockets[13].set_count(self.pockets[13] + count)
         else:
             print("That is not a valid pocket owner.")
