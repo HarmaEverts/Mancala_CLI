@@ -112,7 +112,7 @@ class Board:
                     this_pocket = (this_pocket + 1) % self.size
                     continue
                 else:
-                    self.pockets[this_pocket % self.size].add_one_stone()
+                    self.pockets[this_pocket % self.size].add_stones(1)
                     remaining_stones = remaining_stones - 1
                     last_pocket = this_pocket % self.size
                     this_pocket = (this_pocket + 1) % self.size
@@ -141,11 +141,11 @@ class Board:
             for pocket in range(0, 6):
                 count += self.pockets[pocket].get_count()
                 self.pockets[pocket].set_count(0)
-            self.pockets[6].set_count(self.pockets[6] + count)
+            self.pockets[6].add_stones(count)
         elif owner == "B":
             for pocket in range(7, 13):
                 count += self.pockets[pocket].get_count()
                 self.pockets[pocket].set_count(0)
-            self.pockets[13].set_count(self.pockets[13] + count)
+            self.pockets[13].add_stones(count)
         else:
             print("That is not a valid pocket owner.")

@@ -116,6 +116,11 @@ def start_game():
 
     game.board.print_board()
     game.declare_winner()
+    new_game = input("Would you like to play again? (yes/no)")
+    if new_game == "yes":
+        start_game()
+    else:
+        print("Thanks for playing!")
 
 def print_rules():
     print(

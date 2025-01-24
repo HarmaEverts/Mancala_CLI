@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddc033bb-26cf-40e6-b418-a94be9991439" name="Changes" comment="Put classes into separate files.">
+    <list default="true" id="ddc033bb-26cf-40e6-b418-a94be9991439" name="Changes" comment="Fixed calculation of final score.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mancala.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mancala.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pocket.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pocket.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +45,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.Board.executor": "Run",
     "Python.Mancala.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main"
@@ -81,12 +83,32 @@
       <option name="project" value="LOCAL" />
       <updated>1737717794563</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed calculation of final score.">
+      <option name="closed" value="true" />
+      <created>1737719014390</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1737719014390</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Put classes into separate files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Put classes into separate files." />
+    <MESSAGE value="Fixed calculation of final score." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed calculation of final score." />
   </component>
 </project>

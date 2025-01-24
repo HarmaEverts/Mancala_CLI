@@ -20,8 +20,8 @@ class Pocket:
     def set_count(self, new_count):
         self.count = new_count
 
-    def add_one_stone(self):
-        self.count = self.count + 1
+    def add_stones(self, no_of_stones):
+        self.count = self.count + no_of_stones
 
     def get_name(self):
         return self.name
