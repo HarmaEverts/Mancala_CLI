@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddc033bb-26cf-40e6-b418-a94be9991439" name="Changes" comment="Added UI files to Git.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mancala.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mancala.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/form.ui" beforeDir="false" afterPath="$PROJECT_DIR$/form.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mancala.pyproject" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mancala.pyproject.user" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/form.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mancala_ui.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_form.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
