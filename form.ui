@@ -41,7 +41,7 @@
        <item>
         <widget class="QPushButton" name="button_rules">
          <property name="text">
-          <string>Mancala rules</string>
+          <string>Read Mancala rules</string>
          </property>
         </widget>
        </item>
