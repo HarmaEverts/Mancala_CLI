@@ -91,61 +91,68 @@ class Board:
         else:
             return False
 
+    def free_turn_earned(self, last_pocket, opposite_store):
+        if last_pocket == (opposite_store + 7) % self.size:
+            return True
+        else:
+            return False
+
+    def claim_opposite_stones(self, last_pocket, current_player):
+        # If the current player ends their turn in an empty pocket they own
+        if self.check_opposites(current_player, last_pocket):
+            score = (self.pockets[last_pocket].get_count()
+                     + self.pockets[last_pocket].get_opposite_pocket().get_count())
+            self.pockets[current_player.store].set_count(self.pockets[current_player.store].get_count() + score)
+            self.pockets[last_pocket].set_count(0)
+            self.pockets[last_pocket].get_opposite_pocket().set_count(0)
+            print("Congratulations! You\'ve added " + str(score) + " to your store!")
 
     def execute_move(self, current_pocket, current_player):
-        # Do this differently.
-        # Pick up the stones and drop them depending on the circumstances (own store or not).
-        # This is too complex and also wrong.
-
         free_turn_earned = False
         if current_pocket is not None:
             number_of_stones = current_pocket.get_count()
-            remaining_stones = number_of_stones
+            remaining__number_of_stones = number_of_stones
             current_pocket.set_count(0)
-            start_pocket = current_pocket.place+1
-            this_pocket = start_pocket
-            opposite_store = current_player.get_opposite_store()
+            start_pocket_index = current_pocket.place+1
+            this_pocket_index = start_pocket_index
+            opposite_store_index = current_player.get_opposite_store()
+            last_pocket = start_pocket_index # For the claim_opposite_stones and free_turn_earned functions
 
-            last_pocket = start_pocket
-            while remaining_stones > 0:
-                if this_pocket == opposite_store: # Don't drop a stone in the opponent's store, just skip it.
-                    this_pocket = (this_pocket + 1) % self.size
+            # Put a stone in each next pocket until your hand is empty
+            while remaining__number_of_stones > 0:
+                if this_pocket_index == opposite_store_index: # Don't drop a stone in the opponent's store, just skip it.
+                    this_pocket_index = (this_pocket_index + 1) % self.size
                     continue
                 else:
-                    self.pockets[this_pocket % self.size].add_stones(1)
-                    remaining_stones = remaining_stones - 1
-                    last_pocket = this_pocket % self.size
-                    this_pocket = (this_pocket + 1) % self.size
+                    self.pockets[this_pocket_index % self.size].add_stones(1)
+                    remaining__number_of_stones = remaining__number_of_stones - 1
+                    last_pocket = this_pocket_index % self.size
+                    this_pocket_index = (this_pocket_index + 1) % self.size
 
             print(str(number_of_stones) + " stones moved from pocket " + current_pocket.get_name())
 
             # Check if you put the last stone into an empty pocket to earn a free turn
-            if last_pocket == (opposite_store + 7) % self.size:
-                free_turn_earned = True
+            free_turn_earned = self.free_turn_earned(last_pocket, opposite_store_index)
 
-            # If the current player ends their turn in an empty pocket they own
-            if self.check_opposites(current_player, last_pocket):
-                score = (self.pockets[last_pocket].get_count()
-                         + self.pockets[last_pocket].get_opposite_pocket().get_count())
-                self.pockets[current_player.store].set_count(self.pockets[current_player.store].get_count() + score)
-                self.pockets[last_pocket].set_count(0)
-                self.pockets[last_pocket].get_opposite_pocket().set_count(0)
-                print("Congratulations! You\'ve added " + str(score) + " to your store!")
+            # Take care of adding opposite stones to your store if you hava managed to claim any
+            self.claim_opposite_stones(last_pocket, current_player)
+        else:
+            print("Error: No pocket is selected.")
 
         return free_turn_earned
 
     # Add the remaining stones on the side that still has them to the corresponding player's store
-    def count_side(self, owner):
+    def get_final_score(self, owner):
         count = 0
         if owner == "A":
-            for pocket in range(0, 6):
-                count += self.pockets[pocket].get_count()
-                self.pockets[pocket].set_count(0)
+            for pocket_index in range(0, 6):
+                count += self.pockets[pocket_index].get_count()
+                self.pockets[pocket_index].set_count(0)
             self.pockets[6].add_stones(count)
         elif owner == "B":
-            for pocket in range(7, 13):
-                count += self.pockets[pocket].get_count()
-                self.pockets[pocket].set_count(0)
+            for pocket_index in range(7, 13):
+                count += self.pockets[pocket_index].get_count()
+                self.pockets[pocket_index].set_count(0)
             self.pockets[13].add_stones(count)
         else:
             print("That is not a valid pocket owner.")

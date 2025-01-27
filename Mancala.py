@@ -20,6 +20,11 @@ class Game:
         # Create the game board.
         self.board = Board()
 
+        # Set initial stone count
+        self.player_a_zone_count = 0
+        self.player_b_zone_count = 0
+        self.count_stones_per_side()
+
     # Setting up the players
     def setup_player_names(self):
         name_a = input("What is player A's name? ")
@@ -46,20 +51,22 @@ class Game:
         else:
             print("Something went horrible wrong... no current player selected.")
 
+    def count_stones_per_side(self):
+        self.player_a_zone_count = 0
+        self.player_b_zone_count = 0
+        for pocket in range(0, 6):
+            self.player_a_zone_count += self.board.pockets[pocket].get_count()
+        for pocket in range(7, 13):
+            self.player_b_zone_count += self.board.pockets[pocket].get_count()
+
     # Check if the winning condition has been met (one of the rows of pockets is empty)
     def check_for_victory(self):
-        player_a_zone_count = 0
-        player_b_zone_count = 0
-        for pocket in range(0, 6):
-            player_a_zone_count += self.board.pockets[pocket].get_count()
-        for pocket in range(7, 13):
-            player_b_zone_count += self.board.pockets[pocket].get_count()
-
-        if player_b_zone_count == 0 and player_a_zone_count != 0:
-            self.board.count_side("A")
+        self.count_stones_per_side()
+        if self.player_b_zone_count == 0 and self.player_a_zone_count != 0:
+            self.board.get_final_score("A")
             self.victory = True
-        elif player_a_zone_count == 0 and player_b_zone_count != 0:
-            self.board.count_side("B")
+        elif self.player_a_zone_count == 0 and self.player_b_zone_count != 0:
+            self.board.get_final_score("B")
             self.victory = True
         else:
             self.victory = False
