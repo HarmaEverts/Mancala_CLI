@@ -84,8 +84,9 @@ class Game:
     def choose_pocket(self):
         valid_choice = False
         while not valid_choice:
-            chosen_pocket = input("Which pocket do you want to pick, " + self.current_player.get_name() +
-                                  "? You can choose any pocket that starts with " + self.current_player.get_side() + ".")
+            chosen_pocket = input("Which pocket do you want to pick, " + self.current_player.get_name()
+                                  + "? You can choose any pocket that has a name that starts with "
+                                  + self.current_player.get_side() + ". ")
             valid_choice = self.board.is_pocket_choice_valid(chosen_pocket, self.current_player.get_side())
         return self.board.current_pocket
 
