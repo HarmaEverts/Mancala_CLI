@@ -80,5 +80,4 @@ CMakeLists.txt.user*
 .rcc/
 .uic/
 /build*/
-.qtcreator/
-Mancala/.qtcreator/
+.idea/
