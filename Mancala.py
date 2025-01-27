@@ -85,7 +85,7 @@ class Game:
         valid_choice = False
         while not valid_choice:
             chosen_pocket = input("Which pocket do you want to pick, " + self.current_player.get_name() + "? ")
-            valid_choice = self.board.is_pocket_choice_valid(chosen_pocket)
+            valid_choice = self.board.is_pocket_choice_valid(chosen_pocket, self.current_player.get_side())
         return self.board.current_pocket
 
     # Determine which player has won, whether it was a tie, and what the final scores are.
@@ -140,7 +140,7 @@ def print_rules():
     print(
         "-------------------------------------------------------------------------------------------------------------"
         "-----------------------")
-    print("The Mancala 'board' is made up of two rows of six holes, or pits, each. "
+    print("The Mancala board is made up of two rows of six holes, or pockets, each. "
           "Next, four pieces -- marbles or stones -- are placed in each of the 12 holes. "
           "The color of the pieces is irrelevant.")
     print(

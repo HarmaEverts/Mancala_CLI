@@ -1,7 +1,7 @@
 class Pocket:
-    def __init__(self, name, pit_type, owner, count, place, opposite_pocket):
+    def __init__(self, name, pocket_type, owner, count, place, opposite_pocket):
         self.name= name
-        self.pit_type = pit_type
+        self.pocket_type = pocket_type
         self.owner = owner
         self.count = count
         self.place = place
@@ -23,6 +23,12 @@ class Pocket:
     def add_stones(self, no_of_stones):
         self.count = self.count + no_of_stones
 
+    def get_type(self):
+        return self.pocket_type
+
+    def set_type(self, pocket_type):
+        self.pocket_type = pocket_type
+
     def get_name(self):
         return self.name
 
@@ -39,4 +45,11 @@ class Pocket:
         if self.place == 6 or self.place == 13:
             return True
         else:
+            return False
+
+    def is_valid_pocket(self, current_player):
+        if current_player.get_side == self.owner:
+            return True
+        else:
+            print("You cannot select an opponent\'s pocket. Please choose again.")
             return False

@@ -67,19 +67,29 @@ class Board:
         board += "                                         ------------->                                       \n"
         print(board)
 
-
-    def is_pocket_choice_valid(self, chosen_pocket):
+    def get_pocket_from_name(self, pocket_name):
         for pocket in self.pockets:
-            if chosen_pocket == self.pockets[6].get_name() or chosen_pocket == self.pockets[13].name:
+            if pocket_name == pocket.get_name():
+                return pocket
+        return None
+
+    def is_pocket_choice_valid(self, pocket_name, current_player_side):
+        chosen_pocket = self.get_pocket_from_name(pocket_name)
+        if chosen_pocket is not None:
+            if chosen_pocket.get_type() == "store":
                 print("Selecting a store is not allowed.")
                 self.current_pocket = None
                 return False
+            elif chosen_pocket.get_owner() != current_player_side:
+                print("You can only select pockets that you own.")
+                self.current_pocket = None
+                return False
             else:
-                if chosen_pocket == pocket.get_name():
-                    self.current_pocket = pocket
-                    return True
-        self.current_pocket = None
-        return False
+                self.current_pocket = chosen_pocket
+                return True
+        else:
+            print("That is not a valid pocket name.")
+            return False
 
 
     def check_opposites(self, current_player, last_pocket):
@@ -105,7 +115,7 @@ class Board:
             self.pockets[current_player.store].set_count(self.pockets[current_player.store].get_count() + score)
             self.pockets[last_pocket].set_count(0)
             self.pockets[last_pocket].get_opposite_pocket().set_count(0)
-            print("Congratulations! You\'ve added " + str(score) + " to your store!")
+            print("Congratulations! You\'ve added " + str(score) + " extra stone(s) to your store!")
 
     def execute_move(self, current_pocket, current_player):
         free_turn_earned = False
@@ -113,22 +123,25 @@ class Board:
             number_of_stones = current_pocket.get_count()
             remaining__number_of_stones = number_of_stones
             current_pocket.set_count(0)
-            start_pocket_index = current_pocket.place+1
+            start_pocket_index = current_pocket.place+1 # Start dropping stones in the next pocket
             this_pocket_index = start_pocket_index
-            opposite_store_index = current_player.get_opposite_store()
+            opposite_store_index = current_player.get_opposite_store() # To see which pocket we need to skip
             last_pocket = start_pocket_index # For the claim_opposite_stones and free_turn_earned functions
 
             # Put a stone in each next pocket until your hand is empty
             while remaining__number_of_stones > 0:
-                if this_pocket_index == opposite_store_index: # Don't drop a stone in the opponent's store, just skip it.
+                # Don't drop a stone in the opponent's store, just skip it.
+                if this_pocket_index == opposite_store_index:
                     this_pocket_index = (this_pocket_index + 1) % self.size
                     continue
+                # Drop the stone and update position and hand
                 else:
                     self.pockets[this_pocket_index % self.size].add_stones(1)
                     remaining__number_of_stones = remaining__number_of_stones - 1
                     last_pocket = this_pocket_index % self.size
                     this_pocket_index = (this_pocket_index + 1) % self.size
 
+            # Tell the player what happened
             print(str(number_of_stones) + " stones moved from pocket " + current_pocket.get_name())
 
             # Check if you put the last stone into an empty pocket to earn a free turn
@@ -155,4 +168,4 @@ class Board:
                 self.pockets[pocket_index].set_count(0)
             self.pockets[13].add_stones(count)
         else:
-            print("That is not a valid pocket owner.")
+            print("Error: That is not a valid pocket owner.")
