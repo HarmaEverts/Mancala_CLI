@@ -84,7 +84,8 @@ class Game:
     def choose_pocket(self):
         valid_choice = False
         while not valid_choice:
-            chosen_pocket = input("Which pocket do you want to pick, " + self.current_player.get_name() + "? ")
+            chosen_pocket = input("Which pocket do you want to pick, " + self.current_player.get_name() +
+                                  "? You can choose any pocket that starts with " + self.current_player.get_side() + ".")
             valid_choice = self.board.is_pocket_choice_valid(chosen_pocket, self.current_player.get_side())
         return self.board.current_pocket
 
@@ -128,8 +129,8 @@ def start_game():
 
     game.board.print_board()
     game.declare_winner()
-    new_game = input("Would you like to play again? (yes/no)")
-    if new_game == "yes":
+    new_game = input("Would you like to play again? (y/n) ")
+    if new_game == "y":
         start_game()
     else:
         print("Thanks for playing!")
@@ -174,7 +175,7 @@ while not exit_game:
     elif int(choice) == 2:
         start_game()
     elif int(choice) == 3:
-        print("Goodbye!")
+        print("Thanks for playing. Goodbye!\nThis game was written by Harma Everts, inspired by Mattchu Picchu.")
         exit_game = True
     else:
         print("That is not a valid option. Please choose 1, 2, or 3.")
